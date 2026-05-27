@@ -54,25 +54,25 @@ export function BookingForm() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Book Your <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Training</span>
+            Book Your <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Training</span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
             Ready to elevate your teaching practice? Register for our upcoming training sessions.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid gap-12 items-start">
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center m-auto">
               {/* Glow effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30" />
+              <div className="absolute flex items-center justify-center m-auto w-150 -inset-0.5 bg-linear-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30" />
 
-              <form onSubmit={handleSubmit} className="relative bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 space-y-6">
+              <form onSubmit={handleSubmit} className="relative w-150 bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 space-y-6">
                 {/* Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-white flex items-center gap-2">
@@ -159,10 +159,10 @@ export function BookingForm() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-2xl shadow-purple-500/50"
+                  className="w-full bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-2xl shadow-purple-500/50"
                 >
                   <Send className="w-5 h-5 mr-2" />
-                  Submit Registration
+                  Submit Booking Request
                 </Button>
 
                 <p className="text-white/60 text-sm text-center">
@@ -170,74 +170,6 @@ export function BookingForm() {
                 </p>
               </form>
             </div>
-          </motion.div>
-
-          {/* Info Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-6"
-          >
-            {[
-              {
-                icon: Calendar,
-                title: 'Flexible Scheduling',
-                description: 'Choose training dates that work for your school schedule. We offer weekday, weekend, and holiday sessions.',
-                color: 'from-purple-500 to-pink-500',
-              },
-              {
-                // icon: Users,
-                icon: BookOpen,
-                title: 'Customized Training',
-                description: 'Programs tailored to your school\'s specific needs, class sizes, and teaching objectives.',
-                color: 'from-blue-500 to-cyan-500',
-              },
-              {
-                icon: BookOpen,
-                title: 'Comprehensive Resources',
-                description: 'All participants receive digital resources, certificates, and ongoing support after training.',
-                color: 'from-amber-500 to-orange-500',
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="relative group"
-              >
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${item.color} rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500`} />
-                <div className="relative bg-slate-800/50 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4`}>
-                    <item.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-white/70">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl p-6 text-white"
-            >
-              <h3 className="text-xl font-bold mb-4">Need Immediate Assistance?</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5" />
-                  <span>+234 810 808 4179</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5" />
-                  <span>info@soundskillhub.com</span>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

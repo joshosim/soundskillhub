@@ -33,15 +33,15 @@ export default function Home() {
         <BooksAuthored />
       </div>
       <div id="gallery" className="scroll-mt-20">
-        {/* <VideoGallery /> */}
+        <VideoGallery />
         <PhotoGallery />
       </div>
-      {/* <WhyChooseUs /> */}
+      <WhyChooseUs />
       <div id="testimonials" className="scroll-mt-20">
-        {/* <Testimonials /> */}
+        <Testimonials />
       </div>
       <div id="contact" className="scroll-mt-20">
-        {/* <BookingForm /> */}
+        <BookingForm />
       </div>
       <Footer />
     </main>

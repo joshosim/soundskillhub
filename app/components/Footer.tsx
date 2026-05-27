@@ -133,7 +133,7 @@ export function Footer() {
           </div>
 
           {/* Newsletter Section */}
-          <div className="border-t border-white/10 pt-12 mb-12">
+          {/* <div className="border-t border-white/10 pt-12 mb-12">
             <div className="max-w-2xl mx-auto text-center">
               <h4 className="text-2xl font-bold mb-3">Subscribe to Our Newsletter</h4>
               <p className="text-white/70 mb-6">
@@ -156,7 +156,7 @@ export function Footer() {
                 </Button>
               </form>
             </div>
-          </div>
+          </div> */}
 
           {/* Bottom Bar */}
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -164,13 +164,13 @@ export function Footer() {
               © {new Date().getFullYear()} Soundskill Hub. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/privacy-policy" className="text-white/60 hover:text-white transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/terms-of-service" className="text-white/60 hover:text-white transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/cookie-policy" className="text-white/60 hover:text-white transition-colors">
                 Cookie Policy
               </a>
             </div>
