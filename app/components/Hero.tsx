@@ -119,8 +119,8 @@ export function Hero() {
         >
           {[
             { value: 500, suffix: '+', label: 'Teachers Trained' },
-            { value: 50, suffix: '+', label: 'Schools Partnered' },
-            { value: 10000, suffix: '+', label: 'Students Impacted' },
+            { value: 10, suffix: '+', label: 'Schools Partnered' },
+            { value: 2000, suffix: '+', label: 'Students Impacted' },
           ].map((stat, index) => (
             <motion.div
               key={index}
