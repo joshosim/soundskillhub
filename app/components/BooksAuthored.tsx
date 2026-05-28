@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { BookMarked, CheckCircle2, PenLine, ShoppingBag } from "lucide-react";
 import { useInView } from "./hooks/useInView";
 import BECOMINGHER from '../../public/becoming.jpg';
+import SUPPORT from '../../public/support.jpg';
 import Image from "next/image";
 
 export function BooksAuthored() {
@@ -26,7 +27,7 @@ export function BooksAuthored() {
       highlights: ["Goal setting", "Learning habits", "Confidence building"],
       gradient: "from-blue-600 via-cyan-500 to-emerald-500",
       accent: "bg-cyan-300",
-      image: BECOMINGHER,
+      image: SUPPORT,
     },
   ];
 
