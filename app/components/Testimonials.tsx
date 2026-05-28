@@ -9,36 +9,25 @@ export function Testimonials() {
 
   const testimonials = [
     {
-      name: 'Mummy Jemuel',
-      role: 'Parent',
-      // school: 'Greenfield International School, Lagos',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400',
-      rating: 5,
-      text: 'I have seen an incredible transformation in my child\'s education, My son\'s writing has improved a whole lot! Soundskillhub is doing an excellent job with the kids.',
-    },
-    {
       name: 'Mr. Jasmine Emmanuel-Smart',
       role: 'Parent',
-      // school: 'Excellence Academy, Abuja',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400',
       rating: 5,
-      text: 'I have been meaning to write a review concerning your handwriting class with my son. I don\'t know how you do it but the way my boy\'s handwriting changed was like magic to me.s',
+      text: 'I have seen an incredible transformation in my child\'s education, My son\'s writing has improved a whole lot! Soundskillhub is doing an excellent job with the kids.',
+      badge: true,
     },
     {
-      name: 'Chinony Obioha',
+      name: 'Chinonye Obioha',
       role: 'Parent',
-      // school: 'Sunshine Montessori, Port Harcourt',
-      image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400',
       rating: 5,
-      text: 'You know how he was writing previously, I don\'t even like studying with him because the handwriting annoys me. Thank you so much. I appreciate your effort and patience.',
+      text: 'I have been meaning to write a review concerning your handwriting class with my son. I don\'t know how you do it but the way my boy\'s handwriting changed was like magic to me. You know how he was writing previously, I don\'t even like studying with him because the handwriting annoys me. Thank you so much. I appreciate your effort and patience.',
+      bagde: true,
     },
     {
       name: 'Miracle Ohiafi',
       role: 'Parent',
-      // school: 'Independent Consultant',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400',
       rating: 5,
       text: 'In just 2 months, Soundskillhub transformed my son\'s handwriting from indescribable to legible, clear, and neat. Her patiance, dedication, and love show in the results. Soundskillhub is simply the best handwriting coach.',
+      bagde: true,
     },
   ];
 
@@ -67,44 +56,77 @@ export function Testimonials() {
         </motion.div>
 
         {/* Testimonial Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-3 gap-4">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ y: -4 }}  // ← subtle lift, not scale (avoids layout shift)
               onClick={() => setActiveIndex(index)}
-              className={`cursor-pointer rounded-2xl p-6 transition-all duration-300 ${activeIndex === index
-                ? 'bg-linear-to-br from-purple-600 to-pink-600 text-white shadow-2xl'
-                : 'bg-white text-slate-900 shadow-lg hover:shadow-xl border border-slate-200'
+              className={`relative cursor-pointer rounded-2xl p-6 transition-all duration-300 overflow-hidden ${activeIndex === index
+                ? 'bg-purple-600 text-white shadow-2xl'
+                : 'bg-white text-slate-900 shadow-md hover:shadow-lg border border-slate-200'
                 }`}
             >
-              <img
-                src={testimonial.image}
-                alt={testimonial.name}
-                className="w-16 h-16 rounded-full object-cover mb-4 border-4 border-white/20"
-              />
-              <h4 className={`font-bold mb-1 ${activeIndex === index ? 'text-white' : 'text-slate-900'}`}>
-                {testimonial.name}
-              </h4>
-              <h4 className={`italic mb-1 ${activeIndex === index ? 'text-white' : 'text-slate-900'}`}>
+              {/* Optional verified badge */}
+              {testimonial.badge && (
+                <span className={`absolute top-4 right-4 text-xs px-2 py-0.5 rounded-full ${activeIndex === index
+                  ? 'bg-white/20 text-white'
+                  : 'bg-emerald-50 text-emerald-700'
+                  }`}>
+                  {testimonial.badge}
+                </span>
+              )}
+
+              {/* Large opening quote mark */}
+              <div className={`text-5xl leading-none mb-2 font-serif select-none ${activeIndex === index ? 'text-white/30' : 'text-slate-200'
+                }`}>
+                "
+              </div>
+
+              {/* Review text comes first for readability */}
+              <p className={`text-sm italic leading-relaxed mb-4 ${activeIndex === index ? 'text-white/85' : 'text-slate-600'
+                }`}>
                 {testimonial.text}
-              </h4>
-              <p className={`text-sm mb-3 ${activeIndex === index ? 'text-white/90' : 'text-slate-600'}`}>
-                {testimonial.role}
               </p>
-              <div className="flex gap-1">
+
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star
                     key={i}
                     className={`w-4 h-4 ${activeIndex === index
-                      ? 'fill-amber-300 text-amber-300'
+                      ? 'fill-yellow-300 text-yellow-300'
                       : 'fill-amber-400 text-amber-400'
                       }`}
                   />
                 ))}
+              </div>
+
+              {/* Divider */}
+              <div className={`h-px mb-4 ${activeIndex === index ? 'bg-white/20' : 'bg-slate-100'
+                }`} />
+
+              {/* Author row with avatar */}
+              <div className="flex items-center gap-3">
+                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0 ${activeIndex === index
+                  ? 'bg-white/20 text-white'
+                  : 'bg-purple-100 text-purple-700'
+                  }`}>
+                  {testimonial.name.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <p className={`font-semibold text-sm leading-tight ${activeIndex === index ? 'text-white' : 'text-slate-900'
+                    }`}>
+                    {testimonial.name}
+                  </p>
+                  <p className={`text-xs ${activeIndex === index ? 'text-white/65' : 'text-slate-500'
+                    }`}>
+                    {testimonial.role}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

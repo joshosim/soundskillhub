@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { BookMarked, CheckCircle2, PenLine, ShoppingBag } from "lucide-react";
 import { useInView } from "./hooks/useInView";
+import BECOMINGHER from '../../public/becoming.jpg';
+import Image from "next/image";
 
 export function BooksAuthored() {
   const { ref, inView } = useInView();
@@ -14,6 +16,7 @@ export function BooksAuthored() {
       highlights: ["Letter formation", "Practice routines", "Teacher and parent support"],
       gradient: "from-purple-600 via-pink-600 to-amber-500",
       accent: "bg-amber-300",
+      image: BECOMINGHER,
     },
     {
       title: "How To Support Your Child's Learning At Home",
@@ -23,6 +26,7 @@ export function BooksAuthored() {
       highlights: ["Goal setting", "Learning habits", "Confidence building"],
       gradient: "from-blue-600 via-cyan-500 to-emerald-500",
       accent: "bg-cyan-300",
+      image: BECOMINGHER,
     },
   ];
 
@@ -45,7 +49,7 @@ export function BooksAuthored() {
             Author Resources
           </div>
           <h2 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl">
-            Books <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Authored By Me</span>
+            Books <span className="bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Authored By Me</span>
           </h2>
           <p className="mx-auto max-w-3xl text-xl text-slate-600">
             Practical books created from years of training educators, supporting schools, and helping children learn with confidence.
@@ -61,24 +65,8 @@ export function BooksAuthored() {
               transition={{ duration: 0.6, delay: index * 0.12 }}
               className="group grid gap-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/70 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl md:grid-cols-[220px_1fr] md:p-6"
             >
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-[220px]">
-                <div className="absolute inset-y-3 -right-4 w-8 rounded-r-xl bg-slate-900/20 blur-sm" />
-                <div className={`relative flex h-full flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${book.gradient} p-6 text-white shadow-2xl transition-transform duration-500 group-hover:-rotate-2`}>
-                  <div className="absolute inset-y-0 left-0 w-5 bg-black/20" />
-                  <div className={`absolute right-5 top-5 h-12 w-12 rounded-full ${book.accent} opacity-80`} />
-                  <div className="relative">
-                    <BookMarked className="mb-8 h-9 w-9" />
-                    <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-white/75">
-                      Soundskill Hub
-                    </p>
-                    <h3 className="text-2xl font-bold leading-tight">
-                      {book.title}
-                    </h3>
-                  </div>
-                  <p className="relative text-sm font-semibold text-white/80">
-                    {book.category}
-                  </p>
-                </div>
+              <div className="relative mx-auto aspect-3/4 w-full max-w-55">
+                <Image src={book.image} alt="book.title" className="rounded-2xl hover:scale-105 transition-discrete" />
               </div>
 
               <div className="flex flex-col justify-center">
@@ -94,14 +82,14 @@ export function BooksAuthored() {
                 <ul className="mb-8 space-y-3">
                   {book.highlights.map((highlight) => (
                     <li key={highlight} className="flex items-center gap-3 text-sm text-slate-600">
-                      <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-green-500" />
+                      <CheckCircle2 className="h-5 w-5 shrink-0 text-green-500" />
                       {highlight}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="#contact"
-                  className="inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg shadow-purple-500/25 transition-transform duration-300 hover:scale-105"
+                  className="inline-flex w-fit items-center gap-2 rounded-full bg-linear-to-r from-purple-600 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg shadow-purple-500/25 transition-transform duration-300 hover:scale-105"
                 >
                   <ShoppingBag className="h-5 w-5" />
                   Request a Copy
