@@ -8,10 +8,17 @@ import { useState, useEffect } from 'react';
 type Video = {
   publicId: string;
   title: string;
+  durationSeconds: number | null;
   duration: string;
   videoUrl: string;
   thumbnail: string;
 };
+
+function formatDuration(seconds: number): string {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+}
 
 export function VideoGallery() {
   const { ref, inView } = useInView();
@@ -36,6 +43,45 @@ export function VideoGallery() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    const videosMissingDuration = videos.filter(video => video.durationSeconds == null);
+    if (videosMissingDuration.length === 0) return;
+
+    const metadataLoaders = videosMissingDuration.map(video => {
+      const media = document.createElement('video');
+      media.preload = 'metadata';
+      media.src = video.videoUrl;
+
+      const handleMetadata = () => {
+        if (!Number.isFinite(media.duration)) return;
+
+        setVideos(currentVideos =>
+          currentVideos.map(currentVideo =>
+            currentVideo.publicId === video.publicId
+              ? {
+                  ...currentVideo,
+                  durationSeconds: media.duration,
+                  duration: formatDuration(media.duration),
+                }
+              : currentVideo
+          )
+        );
+      };
+
+      media.addEventListener('loadedmetadata', handleMetadata);
+
+      return () => {
+        media.removeEventListener('loadedmetadata', handleMetadata);
+        media.removeAttribute('src');
+        media.load();
+      };
+    });
+
+    return () => {
+      metadataLoaders.forEach(cleanup => cleanup());
+    };
+  }, [videos]);
 
   const featuredVideo = videos[0] ?? null;
   const regularVideos = videos.slice(1);

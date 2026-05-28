@@ -58,10 +58,11 @@ export function Testimonials() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            What Educators <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Say</span>
+            From the <span className="bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">People </span>
+            I’ve Worked With
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Hear from teachers, principals, and educational leaders who have experienced our training programs.
+            Hear from teachers, parents, and educational leaders who have experienced our training programs.
           </p>
         </motion.div>
 
@@ -76,7 +77,7 @@ export function Testimonials() {
               whileHover={{ scale: 1.05 }}
               onClick={() => setActiveIndex(index)}
               className={`cursor-pointer rounded-2xl p-6 transition-all duration-300 ${activeIndex === index
-                ? 'bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-2xl'
+                ? 'bg-linear-to-br from-purple-600 to-pink-600 text-white shadow-2xl'
                 : 'bg-white text-slate-900 shadow-lg hover:shadow-xl border border-slate-200'
                 }`}
             >

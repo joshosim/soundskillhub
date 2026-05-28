@@ -34,10 +34,13 @@ export async function GET() {
     });
 
     const videos = (result.resources as CloudinaryVideoResource[]).map((video) => {
+      const durationSeconds = video.duration ?? video.video?.duration ?? null;
+
       return {
         publicId: video.public_id,
         title: video.context?.custom?.caption || formatTitle(video.public_id),
-        duration: formatDuration(video.duration || video.video?.duration || 0),
+        durationSeconds,
+        duration: formatDuration(durationSeconds),
         videoUrl: cloudinary.url(video.public_id, {
           resource_type: 'video',
           format: 'mp4',
@@ -61,8 +64,8 @@ export async function GET() {
   }
 }
 
-function formatDuration(seconds: number): string {
-  if (!seconds) return '00:00';
+function formatDuration(seconds: number | null): string {
+  if (!seconds) return '--:--';
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;

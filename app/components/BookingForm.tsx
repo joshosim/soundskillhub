@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { Button } from './ui/button';
@@ -5,7 +7,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Calendar, Mail, Phone, User, Send, BookOpen } from 'lucide-react';
+import { Calendar, Mail, Phone, User, Send, BookOpen, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
 export function BookingForm() {
@@ -17,11 +19,41 @@ export function BookingForm() {
     training: '',
     message: '',
   });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission
+    setSubmitStatus('submitting');
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Could not send your booking request.');
+      }
+
+      setSubmitStatus('success');
+      setSubmitMessage('Your booking request has been sent. We will get back to you within 24 hours.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        training: '',
+        message: '',
+      });
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage(error instanceof Error ? error.message : 'Could not send your booking request.');
+    }
   };
 
   return (
@@ -29,7 +61,7 @@ export function BookingForm() {
       {/* Background */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute top-0 right-0 w-150 h-150 bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -37,7 +69,7 @@ export function BookingForm() {
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-150 h-150 bg-pink-500/10 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.5, 0.3],
@@ -70,9 +102,9 @@ export function BookingForm() {
           >
             <div className="relative flex items-center justify-center m-auto">
               {/* Glow effect */}
-              <div className="absolute flex items-center justify-center m-auto w-150 -inset-0.5 bg-linear-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30" />
+              <div className="absolute flex items-center justify-center m-auto w-full md:w-150 -inset-0.5 bg-linear-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30" />
 
-              <form onSubmit={handleSubmit} className="relative w-150 bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 space-y-6">
+              <form onSubmit={handleSubmit} className="relative w-full md:w-150 bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 space-y-6">
                 {/* Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-white flex items-center gap-2">
@@ -81,6 +113,7 @@ export function BookingForm() {
                   </Label>
                   <Input
                     id="name"
+                    required
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -97,6 +130,7 @@ export function BookingForm() {
                   <Input
                     id="email"
                     type="email"
+                    required
                     placeholder="your.email@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -113,6 +147,7 @@ export function BookingForm() {
                   <Input
                     id="phone"
                     type="tel"
+                    required
                     placeholder="+234 XXX XXX XXXX"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -124,10 +159,10 @@ export function BookingForm() {
                 <div className="space-y-2">
                   <Label htmlFor="training" className="text-white flex items-center gap-2">
                     <BookOpen className="w-4 h-4" />
-                    Training Interest
+                    Training & Interest
                   </Label>
                   <Select value={formData.training} onValueChange={(value) => setFormData({ ...formData, training: value })}>
-                    <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                    <SelectTrigger className="bg-white/5 border-white/10 text-white" aria-required="true">
                       <SelectValue placeholder="Select a training program" />
                     </SelectTrigger>
                     <SelectContent>
@@ -135,6 +170,7 @@ export function BookingForm() {
                       <SelectItem value="print">Print Handwriting Training</SelectItem>
                       <SelectItem value="inclusive">Inclusive Education</SelectItem>
                       <SelectItem value="literacy">Literacy & Mathematics Training</SelectItem>
+                      <SelectItem value="book">Interested in our Book</SelectItem>
                       <SelectItem value="all">All Programs</SelectItem>
                     </SelectContent>
                   </Select>
@@ -159,11 +195,22 @@ export function BookingForm() {
                 <Button
                   type="submit"
                   size="lg"
+                  disabled={submitStatus === 'submitting'}
                   className="w-full bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full shadow-2xl shadow-purple-500/50"
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Submit Booking Request
+                  {submitStatus === 'submitting' ? (
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5 mr-2" />
+                  )}
+                  {submitStatus === 'submitting' ? 'Sending Request...' : 'Submit Booking Request'}
                 </Button>
+
+                {submitMessage && (
+                  <p className={`text-sm text-center ${submitStatus === 'success' ? 'text-emerald-300' : 'text-red-300'}`}>
+                    {submitMessage}
+                  </p>
+                )}
 
                 <p className="text-white/60 text-sm text-center">
                   We&apos;ll get back to you within 24 hours to confirm your training session.
