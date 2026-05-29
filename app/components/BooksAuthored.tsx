@@ -13,21 +13,21 @@ export function BooksAuthored() {
       title: "Becoming Her",
       category: "Inspiration & Growth",
       description:
-        "A practical guide for helping learners build confident, readable handwriting through simple daily practice.",
-      highlights: ["Letter formation", "Practice routines", "Teacher and parent support"],
+        "Becoming Her is a deeply personal and inspiring journey of growth, purpose, and self-discovery. In this book, I share my real-life story, how I moved from uncertainty to clarity, from self-doubt to confidence, and from being \'just a teacher\' to a woman building a brand, impacting lives, and . . . . . . . .",
       gradient: "from-purple-600 via-pink-600 to-amber-500",
       accent: "bg-amber-300",
       image: BECOMINGHER,
+      link: "https://selar.com/9500b8"
     },
     {
       title: "How To Support Your Child's Learning At Home",
       category: "Parenting & Learning",
       description:
-        "A focused resource for parents and educators who want to guide children with clear expectations and steady progress.",
-      highlights: ["Goal setting", "Learning habits", "Confidence building"],
+        "This book provides parents the tips on how to use routine, confidence and focus to raise independent thinkers.",
       gradient: "from-blue-600 via-cyan-500 to-emerald-500",
       accent: "bg-cyan-300",
       image: SUPPORT,
+      link: "https://selar.com/22y847"
     },
   ];
 
@@ -69,7 +69,6 @@ export function BooksAuthored() {
               <div className="relative mx-auto aspect-3/4 w-full max-w-55">
                 <Image src={book.image} alt="book.title" className="rounded-2xl hover:scale-105 transition-discrete" />
               </div>
-
               <div className="flex flex-col justify-center">
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-purple-600">
                   {book.category}
@@ -80,16 +79,8 @@ export function BooksAuthored() {
                 <p className="mb-6 text-slate-600">
                   {book.description}
                 </p>
-                <ul className="mb-8 space-y-3">
-                  {book.highlights.map((highlight) => (
-                    <li key={highlight} className="flex items-center gap-3 text-sm text-slate-600">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-green-500" />
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
                 <a
-                  href="#contact"
+                  href={book.link}
                   className="inline-flex w-fit items-center gap-2 rounded-full bg-linear-to-r from-purple-600 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg shadow-purple-500/25 transition-transform duration-300 hover:scale-105"
                 >
                   <ShoppingBag className="h-5 w-5" />

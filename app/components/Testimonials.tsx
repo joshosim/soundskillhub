@@ -2,6 +2,9 @@ import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { Star, Quote } from 'lucide-react';
 import { useState } from 'react';
+import CHINONYE from '../../public/chinonye.jpg';
+import MIRACLE from '../../public/miracle.jpg';
+import Image from 'next/image';
 
 export function Testimonials() {
   const { ref, inView } = useInView();
@@ -16,6 +19,7 @@ export function Testimonials() {
       badge: true,
     },
     {
+      url: CHINONYE,
       name: 'Chinonye Obioha',
       role: 'Parent',
       rating: 5,
@@ -23,6 +27,7 @@ export function Testimonials() {
       bagde: true,
     },
     {
+      url: MIRACLE,
       name: 'Miracle Ohiafi',
       role: 'Parent',
       rating: 5,
@@ -111,12 +116,14 @@ export function Testimonials() {
 
               {/* Author row with avatar */}
               <div className="flex items-center gap-3">
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0 ${activeIndex === index
+                {!testimonial.url ? <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0 ${activeIndex === index
                   ? 'bg-white/20 text-white'
                   : 'bg-purple-100 text-purple-700'
                   }`}>
                   {testimonial.name.split(' ').map(n => n[0]).join('')}
-                </div>
+                </div> :
+                  <Image src={testimonial.url} alt={testimonial.name}
+                    className="w-9 h-9 rounded-full object-cover shrink-0" />}
                 <div>
                   <p className={`font-semibold text-sm leading-tight ${activeIndex === index ? 'text-white' : 'text-slate-900'
                     }`}>
