@@ -60,10 +60,10 @@ export function VideoGallery() {
           currentVideos.map(currentVideo =>
             currentVideo.publicId === video.publicId
               ? {
-                  ...currentVideo,
-                  durationSeconds: media.duration,
-                  duration: formatDuration(media.duration),
-                }
+                ...currentVideo,
+                durationSeconds: media.duration,
+                duration: formatDuration(media.duration),
+              }
               : currentVideo
           )
         );
@@ -89,26 +89,26 @@ export function VideoGallery() {
 
   if (loading) {
     return (
-      <section className="py-24 bg-slate-900 flex items-center justify-center min-h-100">
-        <Loader2 className="w-10 h-10 text-purple-400 animate-spin" />
+      <section className="py-24 bg-[#fffdf8] dark:bg-[#1b1428] flex items-center justify-center min-h-100 transition-colors duration-300">
+        <Loader2 className="w-10 h-10 text-violet-600 dark:text-amber-200 animate-spin" />
       </section>
     );
   }
 
   if (error) {
     return (
-      <section className="py-24 bg-slate-900 flex items-center justify-center min-h-100">
-        <p className="text-red-400 text-lg">{error}</p>
+      <section className="py-24 bg-[#fffdf8] dark:bg-[#1b1428] flex items-center justify-center min-h-100 transition-colors duration-300">
+        <p className="text-red-600 dark:text-red-400 text-lg">{error}</p>
       </section>
     );
   }
 
   return (
-    <section ref={ref} className="py-24 bg-slate-900 relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-[#fffdf8] dark:bg-[#1b1428] relative overflow-hidden transition-colors duration-300">
       {/* Background blobs */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-125 h-125 bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-125 h-125 bg-pink-500/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <div className="absolute top-0 right-0 w-125 h-125 bg-[#dcc7ff] rounded-full blur-3xl dark:bg-violet-600/30" />
+        <div className="absolute bottom-0 left-0 w-125 h-125 bg-[#ffd85f] rounded-full blur-3xl dark:bg-amber-400/20" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -119,13 +119,13 @@ export function VideoGallery() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-950 dark:text-amber-50 mb-4">
             Training{' '}
-            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="text-violet-700 dark:text-[#ffd85f]">
               Videos
             </span>
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-700 dark:text-amber-50/75 max-w-3xl mx-auto">
             Watch our comprehensive training sessions and educational workshops.
           </p>
         </motion.div>
@@ -153,9 +153,9 @@ export function VideoGallery() {
                 poster={featuredVideo.thumbnail}
                 className="w-full h-125 object-cover bg-black"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-0 z-10 bg-slate-900/45 pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 p-8 z-20 pointer-events-none">
-                <div className="inline-block px-4 py-2 bg-purple-600 rounded-full text-white text-sm font-semibold mb-3">
+                <div className="inline-block px-4 py-2 bg-[#ffd85f] rounded-full text-slate-950 text-sm font-semibold mb-3">
                   Featured Training
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-3">{featuredVideo.title}</h3>
@@ -189,7 +189,7 @@ export function VideoGallery() {
               onMouseLeave={() => setHoveredIndex(null)}
               onClick={() => setActiveVideo(video.videoUrl)}
             >
-              <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-300 h-full">
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden border border-black transition-all duration-300 h-full">
                 {activeVideo === video.videoUrl ? (
                   <video
                     src={video.videoUrl}
@@ -222,10 +222,10 @@ export function VideoGallery() {
                   </div>
                 )}
                 <div className="p-4">
-                  <h4 className="text-white font-semibold mb-2 line-clamp-2 group-hover:text-purple-400 transition-colors">
+                  <h4 className="text-black dark:text-white font-semibold mb-2 line-clamp-2 group-hover:text-black/75 transition-colors">
                     {video.title}
                   </h4>
-                  <div className="flex items-center gap-2 text-white/60 text-sm">
+                  <div className="flex items-center gap-2 text-black dark:text-white/60 text-sm">
                     <Clock className="w-4 h-4" />
                     <span>{video.duration}</span>
                   </div>

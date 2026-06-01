@@ -5,26 +5,26 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
+  --background: #fffdf8;
+  --foreground: #141118;
   --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
+  --card-foreground: #141118;
+  --popover: #ffffff;
+  --popover-foreground: #141118;
+  --primary: #6f49df;
+  --primary-foreground: #ffffff;
+  --secondary: #f9d255;
+  --secondary-foreground: #181018;
+  --muted: #f2edf9;
+  --muted-foreground: #665f70;
+  --accent: #dcc7ff;
+  --accent-foreground: #2d1c57;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
+  --border: rgba(45, 28, 87, 0.14);
   --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
+  --input-background: #fff8df;
+  --switch-background: #dcc7ff;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: oklch(0.708 0 0);
@@ -45,24 +45,26 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: #151020;
+  --foreground: #fffaf0;
+  --card: #211831;
+  --card-foreground: #fffaf0;
+  --popover: #211831;
+  --popover-foreground: #fffaf0;
+  --primary: #cdb7ff;
+  --primary-foreground: #191024;
+  --secondary: #ffd85f;
+  --secondary-foreground: #191024;
+  --muted: #2d2340;
+  --muted-foreground: #d5cbe7;
+  --accent: #6f49df;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
+  --border: rgba(255, 250, 240, 0.15);
+  --input: #2d2340;
+  --input-background: #2d2340;
+  --switch-background: #6f49df;
   --ring: oklch(0.439 0 0);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
@@ -122,6 +124,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-hand: "Segoe Print", "Bradley Hand ITC", "Comic Sans MS", cursive;
 }
 
 @layer base {
@@ -173,5 +176,18 @@
   input {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
+  }
+}
+
+@layer utilities {
+  .font-hand {
+    font-family: var(--font-hand);
+  }
+
+  .paper-grid {
+    background-image:
+      linear-gradient(rgba(111, 73, 223, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(111, 73, 223, 0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
   }
 }

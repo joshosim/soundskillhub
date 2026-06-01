@@ -104,11 +104,11 @@ export function PhotoGallery() {
 
   return (
     <>
-      <section ref={ref} className="py-24 bg-gradient-to-br from-white via-purple-50 to-pink-50 relative overflow-hidden">
+      <section ref={ref} className="py-24 bg-[#fffdf8] dark:bg-[#1b1428] relative overflow-hidden transition-colors duration-300">
         {/* Background decoration */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-40 left-40 w-96 h-96 bg-purple-200 rounded-full blur-3xl" />
-          <div className="absolute bottom-40 right-40 w-96 h-96 bg-pink-200 rounded-full blur-3xl" />
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <div className="absolute top-40 left-40 w-96 h-96 bg-[#dcc7ff] rounded-full blur-3xl dark:bg-violet-600/30" />
+          <div className="absolute bottom-40 right-40 w-96 h-96 bg-[#ffd85f] rounded-full blur-3xl dark:bg-amber-400/20" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -118,10 +118,10 @@ export function PhotoGallery() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-              Our <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Gallery</span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-950 dark:text-amber-50 mb-4">
+              Our <span className="text-violet-700 dark:text-[#ffd85f]">Gallery</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-slate-700 dark:text-amber-50/75 max-w-3xl mx-auto">
               Moments from our training sessions, workshops, and educational activities.
             </p>
           </motion.div>
@@ -152,7 +152,7 @@ export function PhotoGallery() {
                     />
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 bg-slate-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <ZoomIn className="w-12 h-12 text-white mb-4" />
                         <h3 className="text-white font-bold text-lg px-4 text-center">{image.title}</h3>
@@ -161,7 +161,7 @@ export function PhotoGallery() {
                     </div>
 
                     {/* Category badge */}
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-900">
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-violet-800">
                       {image.category}
                     </div>
                   </div>

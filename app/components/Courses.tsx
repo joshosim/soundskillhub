@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { Button } from './ui/button';
-import { Clock, Users, Star, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Users, Star, BookOpen, CheckCircle2 } from 'lucide-react';
 
 export function Courses() {
   const { ref, inView } = useInView();
@@ -47,18 +47,18 @@ export function Courses() {
       case 'Intermediate':
         return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
       case 'Advanced':
-        return 'bg-purple-500/10 text-purple-600 border-purple-500/20';
+        return 'bg-violet-500/10 text-violet-700 border-violet-500/20 dark:text-violet-200';
       default:
         return 'bg-gray-500/10 text-gray-600 border-gray-500/20';
     }
   };
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-br from-slate-50 via-white to-purple-50 relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-[#fffdf8] dark:bg-[#1b1428] relative overflow-hidden transition-colors duration-300">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-purple-200 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-72 h-72 bg-blue-200 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-72 h-72 bg-[#dcc7ff] rounded-full blur-3xl dark:bg-violet-600/30" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-[#ffd85f] rounded-full blur-3xl dark:bg-amber-400/20" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -68,10 +68,10 @@ export function Courses() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Featured <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Courses</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-950 dark:text-amber-50 mb-4">
+            Featured <span className="text-violet-700 dark:text-[#ffd85f]">Courses</span>
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-700 dark:text-amber-50/75 max-w-3xl mx-auto">
             Comprehensive professional development courses designed for educators at every level.
           </p>
         </motion.div>
@@ -85,10 +85,10 @@ export function Courses() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group"
             >
-              <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-200/50">
+              <div className="bg-white dark:bg-white/10 rounded-[1.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-violet-100 dark:border-white/10">
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10" />
+                  <div className="absolute inset-0 z-10 bg-slate-900/45" />
                   <img
                     src={course.image}
                     alt={course.title}
@@ -101,12 +101,12 @@ export function Courses() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">
+                  <h3 className="text-2xl font-bold text-slate-950 dark:text-amber-50 mb-3 group-hover:text-violet-700 dark:group-hover:text-[#ffd85f] transition-colors">
                     {course.title}
                   </h3>
 
                   {/* Stats */}
-                  <div className="flex flex-wrap gap-4 mb-4 text-sm text-slate-600">
+                  <div className="flex flex-wrap gap-4 mb-4 text-sm text-slate-600 dark:text-amber-50/70">
                     {/* <div className="flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       {course.duration}
@@ -124,7 +124,7 @@ export function Courses() {
                   {/* Highlights */}
                   <ul className="space-y-2 mb-6">
                     {course.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-slate-600">
+                      <li key={idx} className="flex items-start gap-2 text-slate-700 dark:text-amber-50/70">
                         <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                         <span className="text-sm">{highlight}</span>
                       </li>
@@ -146,23 +146,6 @@ export function Courses() {
             </motion.div>
           ))}
         </div>
-
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white rounded-full px-8"
-          >
-            <BookOpen className="w-5 h-5 mr-2" />
-            More Coming Soon ...
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ import { WhyChooseUs } from "./components/WhyChooseUs";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Header />
       <div id="home" className="scroll-mt-20">
         <Hero />
