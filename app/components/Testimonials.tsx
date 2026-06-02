@@ -38,7 +38,7 @@ export function Testimonials() {
       role: 'Parent',
       location: 'Nigeria',
       rating: 5,
-      text: "I have been meaning to write a review concerning your handwriting class with my son. I don't know how you do it but the way my boy's handwriting changed was like magic to me. You know how he was writing previously, I don't even like studying with him because the handwriting annoys me. Thank you so much. I appreciate your effort and patience.",
+      text: "Ms. Glory is a seasoned Handwriting Coach. She has an indepth knowledge on the concept of Handwriting. I have seen how she transforms a supposed hopeless handwriting to something incredible. I have paid and participated in her classes, I have also referred her services.",
       badge: true,
     },
     {

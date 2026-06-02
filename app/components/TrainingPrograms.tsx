@@ -1,40 +1,12 @@
 import { motion } from 'motion/react';
+import Link from 'next/link';
 import { useInView } from './hooks/useInView';
-import { PenTool, BookText, Users2, GraduationCap } from 'lucide-react';
+import { trainingPrograms } from '../data/trainingPrograms';
 
 export function TrainingPrograms() {
   const { ref, inView } = useInView();
 
-  const programs = [
-    {
-      icon: PenTool,
-      title: 'Nelson Handwriting',
-      description: 'Comprehensive training in the Nelson Handwriting methodology, focusing on consistent letter formation, fluency, and legibility.',
-      features: ['Letter formation', 'Handwriting fluency', 'Assessment tools', 'Teacher resources'],
-      color: 'bg-violet-600',
-    },
-    {
-      icon: BookText,
-      title: 'Print Handwriting',
-      description: 'Master the fundamentals of print handwriting instruction for early years learners with proven techniques.',
-      features: ['Foundation skills', 'Print mastery', 'Progress tracking', 'Parent guides'],
-      color: 'bg-[#ffd85f]',
-    },
-    {
-      icon: Users2,
-      title: 'Inclusive Education',
-      description: 'Differentiated instruction strategies that meet diverse learning needs and create equitable learning environments.',
-      features: ['Differentiation', 'UDL framework', 'Adaptive methods', 'Special needs'],
-      color: 'bg-emerald-500',
-    },
-    {
-      icon: GraduationCap,
-      title: 'Literacy & Mathematics',
-      description: 'Creative, engaging approaches to teaching foundational literacy and numeracy skills in early childhood education.',
-      features: ['Phonics methods', 'Number sense', 'Creative activities', 'Assessment'],
-      color: 'bg-[#dcc7ff]',
-    },
-  ];
+  const displayedPrograms = trainingPrograms.slice(0, 4);
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-[#fffdf8] py-24 transition-colors duration-300 dark:bg-[#1b1428]">
@@ -61,7 +33,7 @@ export function TrainingPrograms() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {programs.map((program, index) => (
+          {displayedPrograms.map((program, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -93,6 +65,21 @@ export function TrainingPrograms() {
             </motion.div>
           ))}
         </div>
+
+        {/* See More Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 text-center"
+        >
+          <Link
+            href="/trainings"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-violet-700 text-white font-semibold hover:shadow-xl hover:shadow-violet-500/40 transition-all duration-300 hover:scale-105"
+          >
+            See More Training Programs
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
