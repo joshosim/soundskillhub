@@ -9,6 +9,7 @@ import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Calendar, Mail, Phone, User, Send, BookOpen, Loader2 } from 'lucide-react';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 export function BookingForm() {
   const { ref, inView } = useInView();
@@ -22,25 +23,53 @@ export function BookingForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
 
+  const trainingLabels: Record<string, string> = {
+    nelson: 'Nelson Handwriting Training',
+    print: 'Print Handwriting Training',
+    inclusive: 'Inclusive Education',
+    literacy: 'Literacy & Mathematics Training',
+    book: 'Interested in our Book',
+    all: 'All Programs',
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus('submitting');
     setSubmitMessage('');
 
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    console.log('[EmailJS] Config:', { serviceId, templateId, publicKey });
+    console.log('[EmailJS] Sending payload:', {
+      name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      training_interest: trainingLabels[formData.training] || formData.training,
+      message: formData.message || 'No additional message provided.',
+    });
+
     try {
-      const response = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const result = await response.json();
+      const result = await emailjs.send(
+        serviceId!,
+        templateId!,
+        {
+          name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          training_interest: trainingLabels[formData.training] || formData.training,
+          message: formData.message || 'No additional message provided.',
+        },
+        publicKey!
+      );
 
-      if (!response.ok) throw new Error(result.error || 'Could not send your booking request.');
-
+      console.log('[EmailJS] Success:', result);
       setSubmitStatus('success');
       setSubmitMessage('Your booking request has been sent. We will get back to you within 24 hours.');
       setFormData({ name: '', email: '', phone: '', training: '', message: '' });
     } catch (error) {
+      console.error('[EmailJS] Error:', error);
       setSubmitStatus('error');
       setSubmitMessage(error instanceof Error ? error.message : 'Could not send your booking request.');
     }

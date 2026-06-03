@@ -12,6 +12,7 @@ import { Testimonials } from "./components/Testimonials";
 import { TrainingPrograms } from "./components/TrainingPrograms";
 import { VideoGallery } from "./components/VideoGallery";
 import { WhyChooseUs } from "./components/WhyChooseUs";
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (
@@ -44,6 +45,7 @@ export default function Home() {
         <BookingForm />
       </div>
       <Footer />
+      <Analytics />
     </main>
   );
 }
