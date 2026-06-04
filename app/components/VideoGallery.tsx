@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
 import { Play, Clock, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 type Video = {
   publicId: string;
@@ -162,7 +163,11 @@ export function VideoGallery() {
                 <div className="flex items-center gap-6 text-white/80">
                   <div className="flex items-center gap-2">
                     <Clock className="w-5 h-5" />
-                    <span>{featuredVideo.duration}</span>
+                    {featuredVideo.durationSeconds != null ? (
+                      <span>{featuredVideo.duration}</span>
+                    ) : (
+                      <div className="w-16 h-5 bg-white/20 animate-pulse rounded" />
+                    )}
                   </div>
                 </div>
               </div>
@@ -201,7 +206,9 @@ export function VideoGallery() {
                   />
                 ) : (
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <Image
+                      width={500}
+                      height={300}
                       src={video.thumbnail}
                       alt={video.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -216,9 +223,16 @@ export function VideoGallery() {
                         <Play className="w-6 h-6 text-white fill-white ml-0.5" />
                       </div>
                     </motion.div>
-                    <div className="absolute bottom-3 right-3 px-2 py-1 bg-slate-900/80 backdrop-blur-sm rounded text-white text-xs font-semibold">
-                      {video.duration}
-                    </div>
+                    {video.durationSeconds != null && (
+                      <div className="absolute bottom-3 right-3 px-2 py-1 bg-slate-900/80 backdrop-blur-sm rounded text-white text-xs font-semibold">
+                        {video.duration}
+                      </div>
+                    )}
+                    {video.durationSeconds == null || isNaN(video.durationSeconds) && (
+                      <div className="absolute bottom-3 right-3 px-2 py-1 bg-slate-900/80 backdrop-blur-sm rounded">
+                        <div className="w-10 h-3 bg-white/20 animate-pulse rounded" />
+                      </div>
+                    )}
                   </div>
                 )}
                 <div className="p-4">
@@ -227,7 +241,11 @@ export function VideoGallery() {
                   </h4>
                   <div className="flex items-center gap-2 text-black dark:text-white/60 text-sm">
                     <Clock className="w-4 h-4" />
-                    <span>{video.duration}</span>
+                    {video.durationSeconds != null ? (
+                      <span>{video.duration}</span>
+                    ) : (
+                      <div className="w-12 h-4 bg-slate-300 dark:bg-white/20 animate-pulse rounded" />
+                    )}
                   </div>
                 </div>
               </div>

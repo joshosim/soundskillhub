@@ -13,7 +13,7 @@ export default function TrainingsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
-      
+
       <section ref={ref} className="relative overflow-hidden bg-[#fffdf8] py-24 transition-colors duration-300 dark:bg-[#1b1428]">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
@@ -91,8 +91,6 @@ export default function TrainingsPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

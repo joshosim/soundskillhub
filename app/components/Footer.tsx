@@ -103,16 +103,16 @@ export function Footer() {
               <h4 className="text-lg font-bold mb-4 text-slate-950 dark:text-amber-50">Get In Touch</h4>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-violet-700 dark:text-[#ffd85f] flex-shrink-0 mt-0.5" />
+                  <MapPin className="w-5 h-5 text-violet-700 dark:text-[#ffd85f] shrink-0 mt-0.5" />
                   <span className="text-slate-700 dark:text-amber-50/75">Yenegoa, Nigeria</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-violet-700 dark:text-[#ffd85f] flex-shrink-0 mt-0.5" />
+                  <Phone className="w-5 h-5 text-violet-700 dark:text-[#ffd85f] shrink-0 mt-0.5" />
                   <span className="text-slate-700 dark:text-amber-50/75">+234 810 808 4179</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-violet-700 dark:text-[#ffd85f] flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700 dark:text-amber-50/75">info@soundskillhub.com</span>
+                  <Mail className="w-5 h-5 text-violet-700 dark:text-[#ffd85f] shrink-0 mt-0.5" />
+                  <span className="text-slate-700 dark:text-amber-50/75">gloryntion@gmail.com</span>
                 </li>
               </ul>
 

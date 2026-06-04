@@ -17,6 +17,7 @@ import MImage from '../../public/m.jpg';
 import NImage from '../../public/n.jpg';
 import OImage from '../../public/o.jpg';
 import PImage from '../../public/p.jpg';
+import Image from 'next/image';
 
 
 export function PhotoGallery() {
@@ -145,7 +146,9 @@ export function PhotoGallery() {
                   onClick={() => setSelectedImage(image.url.src)}
                 >
                   <div className="relative overflow-hidden rounded-2xl">
-                    <img
+                    <Image
+                      width={500}
+                      height={300}
                       src={image.url.src}
                       alt={image.title}
                       className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-500"

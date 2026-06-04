@@ -1,0 +1,16 @@
+{
+  "name": "SoundSkillHub - Educational Training",
+  "short_name": "SoundSkillHub",
+  "description": "Premier educational training for schools and educators in Nigeria",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffdf8",
+  "theme_color": "#ffd85f",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

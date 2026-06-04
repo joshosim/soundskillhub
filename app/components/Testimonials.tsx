@@ -35,8 +35,8 @@ export function Testimonials() {
     {
       url: CHINONYE,
       name: 'Chinonye Obioha',
-      role: 'Parent',
-      location: 'Nigeria',
+      role: null,
+      location: 'Yenegoa',
       rating: 5,
       text: "Ms. Glory is a seasoned Handwriting Coach. She has an indepth knowledge on the concept of Handwriting. I have seen how she transforms a supposed hopeless handwriting to something incredible. I have paid and participated in her classes, I have also referred her services.",
       badge: true,
@@ -272,7 +272,7 @@ export function Testimonials() {
                 onClick={() => setActiveIndex(index % testimonials.length)}
                 className={`
                   relative rounded-2xl p-6 transition-all duration-300 overflow-hidden
-                  flex-shrink-0 w-[85vw] sm:w-72 lg:w-80
+                  shrink-0 w-[85vw] sm:w-72 lg:w-80
                   ${activeIndex === index % testimonials.length
                     ? 'bg-violet-700 text-white shadow-2xl'
                     : 'bg-white text-slate-900 shadow-md hover:shadow-lg border border-violet-100 dark:bg-white/10 dark:text-amber-50 dark:border-white/10'

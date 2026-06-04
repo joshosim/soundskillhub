@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
 import { useInView } from './hooks/useInView';
-import { Button } from './ui/button';
-import { Users, Star, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Users, Star, CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
+import ClassImage from '../../public/class.jpeg';
+import StudentImage from '../../public/student.jpeg';
 
 export function Courses() {
   const { ref, inView } = useInView();
@@ -14,7 +16,7 @@ export function Courses() {
       students: '120+',
       rating: 4.9,
       price: '₦45,000',
-      image: 'https://images.unsplash.com/photo-1602145095452-aba06946ed05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kd3JpdGluZyUyMHByYWN0aWNlJTIwc3R1ZGVudHMlMjBjbGFzc3Jvb218ZW58MXx8fHwxNzc5NzE0NzgyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: ClassImage,
       highlights: [
         'Nelson Handwriting basics',
         'Letter formation techniques',
@@ -30,7 +32,7 @@ export function Courses() {
       students: '65+',
       rating: 4.8,
       price: '₦75,000',
-      image: 'https://images.unsplash.com/photo-1529390079861-591de354faf5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwc3R1ZGVudHMlMjB3cml0aW5nfGVufDF8fHx8MTc3OTcxNDc4NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: StudentImage,
       highlights: [
         // 'UDL framework implementation',
         'Special needs strategies',
@@ -85,11 +87,13 @@ export function Courses() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group"
             >
-              <div className="bg-white dark:bg-white/10 rounded-[1.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-violet-100 dark:border-white/10">
+              <div className="bg-white dark:bg-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-violet-100 dark:border-white/10">
                 {/* Image */}
                 <div className="relative h-56 overflow-hidden">
                   <div className="absolute inset-0 z-10 bg-slate-900/45" />
-                  <img
+                  <Image
+                    width={500}
+                    height={300}
                     src={course.image}
                     alt={course.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -125,7 +129,7 @@ export function Courses() {
                   <ul className="space-y-2 mb-6">
                     {course.highlights.map((highlight, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-slate-700 dark:text-amber-50/70">
-                        <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                         <span className="text-sm">{highlight}</span>
                       </li>
                     ))}
